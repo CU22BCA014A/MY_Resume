@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Name | Data Science Portfolio</title>
+    <title>Nikhil N | Data Science Portfolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
     <style>
@@ -302,6 +302,26 @@
             background: #4b62db;
         }
 
+        /* ACHIEVEMENTS SECTION STYLES */
+        .achievement-item {
+            background: var(--background-dark);
+            border-left: 5px solid var(--primary-color);
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .achievement-item h3 {
+            color: var(--text-light);
+            margin-bottom: 5px;
+        }
+
+        .achievement-item p {
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
         /* CONTACT SECTION */
         .contact-info {
             text-align: center;
@@ -385,16 +405,16 @@
 <body>
     <header>
         <div class="container">
-            <h1 class="logo">Nikhil N M</h1>
+            <h1 class="logo">Nikhil N </h1>
             <nav>
                 <ul>
                     <li><a href="#home">Home</a></li>
                     <li><a href="#about">About</a></li>
                     <li><a href="#skills">Skills</a></li>
                     <li><a href="#projects">Projects</a></li>
-		    <li><a href="#Achivements">Achivements</a></li>
+                    <li><a href="#achievements">Achievements</a></li>
                     <li><a href="#contact">Contact</a></li>
-	            
+                   
                 </ul>
             </nav>
         </div>
@@ -429,7 +449,7 @@
                         <p>
                             Currently seeking opportunities to apply my skills in a challenging and dynamic environment. I'm always eager to learn new technologies and contribute to open-source projects.
                         </p>
-                        <a href="#" class="btn-download" download>Download Resume <i class="fas fa-download"></i></a>
+                        <a href="#" class="Nikhil_Resume.pdf[195].pdf" download>Download Resume <i class="fas fa-download"></i></a>
                     </div>
                 </div>
             </div>
@@ -499,7 +519,38 @@
             </div>
         </section>
 
-        <section id="contact" class="section bg-dark">
+        <section id="achievements" class="section bg-dark">
+            <div class="container">
+                <h2>🏅 Sports & NCC Achievements</h2>
+                
+                <div class="achievement-list">
+                    
+                    <div class="achievement-item">
+                        <h3>National Cadet Corps (NCC) - C Certificate</h3>
+                        <p>Successfully completed the NCC 'C' Certificate examination, demonstrating proficiency in discipline, leadership, and national service. (Year: [Insert Year], Rank: [Insert Rank])</p>
+                    </div>
+                    
+                    <div class="achievement-item">
+                        <h3>NCC Camp Participation</h3>
+                        <p>Participated in the **Annual Training Camp (ATC)**, undertaking rigorous physical and military training drills for 10 days. (Location: [Insert Location], Year: [Insert Year])</p>
+                    </div>
+
+                    <div class="achievement-item">
+                        <h3>Sports - University Level [Name of Sport]</h3>
+                        <p>Secured the **[e.g., Bronze Medal]** in the [Sporting Event, e.g., High Jump] event at the University-level Sports Meet. (Year: [Insert Year])</p>
+                    </div>
+                    
+                    <div class="achievement-item">
+                        <h3>Team Sports - [Team Name/Role]</h3>
+                        <p>Served as a key member of the College **[e.g., Volleyball]** team, contributing to success in various Inter-collegiate tournaments. (Year: [Insert Academic Year])</p>
+                    </div>
+
+                </div>
+                
+                <p style="text-align: center; margin-top: 30px; color: var(--text-light);">These experiences highlight my dedication, teamwork, and ability to excel in high-pressure environments.</p>
+            </div>
+        </section>
+        <section id="contact" class="section">
             <div class="container">
                 <h2>Get In Touch</h2>
                 <p>I am currently open to new opportunities and collaborations. Feel free to reach out!</p>
@@ -509,7 +560,7 @@
                 </div>
                 <div class="social-links">
                     <a href="https://www.linkedin.com/in/nikhil-n-m-ab4771254/" target="_blank" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="https://github.com/"_blank" class="social-icon"><i class="fab fa-github"></i></a>
+                    <a href="https://github.com/" target="_blank" class="social-icon"><i class="fab fa-github"></i></a>
                 </div>
             </div>
         </section>
@@ -517,7 +568,7 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 Your Name. All rights reserved.</p>
+            <p>&copy; 2025 Nikhil N. All rights reserved.</p>
         </div>
     </footer>
 
@@ -529,7 +580,8 @@
             anchor.addEventListener('click', function(e) {
                 e.preventDefault(); // Prevent default anchor link behavior
 
-                const targetId = this.getAttribute('href'); // Get the target section's ID
+                // Changed 'href' to lowercase to match the corrected ID 'achievements'
+                const targetId = this.getAttribute('href').toLowerCase(); // Get the target section's ID
                 const targetElement = document.querySelector(targetId); // Find the element
 
                 if (targetElement) {
