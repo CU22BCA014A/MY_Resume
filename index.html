@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nikhil N | Data Science Portfolio</title>
+    <title>Nikhil N M | Data Science Portfolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     
     <style>
         /* CSS STYLES (Internal) */
@@ -14,9 +15,16 @@
             --primary-color: #00bcd4; /* Cyan/Teal for highlights */
             --secondary-color: #3f51b5; /* Indigo/Purple for contrast */
             --background-dark: #1e1e1e; /* Main dark background */
-            --background-light: #2c2c2c; /* Slightly lighter dark for sections */
+            --background-light: #2c2c2c; /* Slightly lighter dark for sections/cards */
             --text-light: #f4f4f4; /* Light text color */
             --text-secondary: #aaaaaa; /* Grey secondary text */
+        }
+
+        /* KEYFRAMES FOR LIVE BACKGROUND EFFECT (Subtle Gradient Movement) */
+        @keyframes subtle-move {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         /* BASE STYLES & RESET */
@@ -24,15 +32,48 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Roboto', sans-serif; /* Applied Roboto font */
         }
 
         body {
-            font-family: 'Arial', sans-serif;
             line-height: 1.6;
             background-color: var(--background-dark);
             color: var(--text-light);
             transition: background-color 0.3s ease, color 0.3s ease;
+            position: relative; /* Needed for z-index stacking */
+            overflow-x: hidden; /* Prevent horizontal scroll from effects */
         }
+
+        /* === NEW: Live Background Layer (Subtle Gradient Animation) === */
+        #live-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2; /* Placed behind content and particles */
+            background: linear-gradient(270deg, var(--background-dark), #0d0d0d, var(--background-dark));
+            background-size: 600% 600%;
+            animation: subtle-move 30s ease infinite;
+            opacity: 0.7;
+        }
+
+        /* === NEW: Particles Container === */
+        #particles-js {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Placed behind content */
+        }
+        
+        /* Ensure all content sits above the fixed background layers */
+        header, main, footer {
+            position: relative;
+            z-index: 10;
+        }
+
 
         .container {
             max-width: 1200px;
@@ -69,7 +110,7 @@
         .bg-dark {
             background-color: var(--background-light);
         }
-
+        
         /* HEADER AND NAVIGATION */
         header {
             background: var(--background-dark);
@@ -78,6 +119,8 @@
             top: 0;
             z-index: 1000;
             border-bottom: 1px solid var(--text-secondary);
+            /* Add a subtle dark shadow for floating effect */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5); 
         }
 
         header .container {
@@ -109,6 +152,12 @@
         nav a:hover {
             border-color: var(--primary-color);
         }
+        
+        /* Active navigation link highlighting */
+        nav a.active-link {
+            color: #00e5ff; /* Slightly brighter cyan */
+            border-bottom: 2px solid var(--primary-color);
+        }
 
         /* HERO SECTION */
         .hero {
@@ -129,6 +178,8 @@
             font-size: 4rem;
             margin: 10px 0;
             color: var(--text-light);
+            /* Add a subtle text shadow for a more polished look */
+            text-shadow: 0 0 10px rgba(0, 188, 212, 0.3);
         }
 
         .hero-content .tagline {
@@ -156,18 +207,20 @@
             transition: background-color 0.3s ease, transform 0.3s ease;
             border: none;
             cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 188, 212, 0.4); /* Button glow effect */
         }
 
         .cta-button:hover {
             background: #00e5ff;
             transform: translateY(-2px);
             color: var(--background-dark);
+            box-shadow: 0 7px 20px rgba(0, 188, 212, 0.6);
         }
 
         .projects-button {
             margin-top: 30px;
         }
-
+        
         /* ABOUT SECTION */
         .about-content {
             display: flex;
@@ -182,7 +235,7 @@
             border-radius: 50%;
             object-fit: cover;
             border: 5px solid var(--primary-color);
-            box-shadow: 0 0 20px rgba(0, 188, 212, 0.5);
+            box-shadow: 0 0 30px rgba(0, 188, 212, 0.7); /* Enhanced glow */
         }
 
         .bio-text {
@@ -193,18 +246,17 @@
             margin-bottom: 15px;
             color: var(--text-secondary);
         }
-
+        
+        /* DOWNLOAD BUTTON STYLES */
         .btn-download {
-            display: inline-block;
             background: var(--secondary-color);
             color: var(--text-light);
-            padding: 10px 20px;
-            border-radius: 5px;
-            margin-top: 15px;
+            box-shadow: 0 5px 15px rgba(63, 81, 181, 0.4);
         }
 
         .btn-download:hover {
             background: #4b62db;
+            box-shadow: 0 7px 20px rgba(63, 81, 181, 0.6);
         }
 
         /* SKILLS SECTION */
@@ -216,16 +268,17 @@
         }
 
         .skill-card {
-            background: var(--background-dark);
+            background: var(--background-dark); /* Changed to dark for contrast on bg-dark section */
             padding: 30px;
             border-radius: 10px;
             border-bottom: 3px solid var(--primary-color);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .skill-card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 188, 212, 0.3); /* Lift and glow */
         }
 
         .skill-card i {
@@ -254,24 +307,28 @@
             background: var(--background-light);
             border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            transition: box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
         }
 
         .project-card:hover {
-            box-shadow: 0 5px 25px rgba(0, 188, 212, 0.5);
+            transform: scale(1.02); /* Slight zoom on hover */
+            box-shadow: 0 8px 25px rgba(0, 188, 212, 0.6);
         }
         
-        /* Note: For the single file preview, you must use a public image URL or a placeholder color/gradient here. */
         .project-card .project-image-placeholder {
             width: 100%;
             height: 200px;
-            background: linear-gradient(135deg, var(--secondary-color), var(--background-dark));
+            /* Use a more vibrant gradient or a specific project color */
+            background: linear-gradient(135deg, var(--secondary-color), #5e72e4); 
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--text-light);
             font-weight: bold;
+            text-align: center;
+            font-size: 1.2rem;
+            padding: 15px;
         }
 
         .project-card h3 {
@@ -296,30 +353,71 @@
             background: var(--secondary-color);
             padding: 8px 12px;
             border-radius: 5px;
+            transition: background 0.3s ease;
         }
 
         .project-links a:hover {
             background: #4b62db;
         }
 
-        /* ACHIEVEMENTS SECTION STYLES */
-        .achievement-item {
-            background: var(--background-dark);
-            border-left: 5px solid var(--primary-color);
-            padding: 20px;
-            margin-bottom: 20px;
-            border-radius: 5px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        /* ACHIEVEMENTS SECTION STYLES (MODIFIED FOR VISUAL IMPACT) */
+        .achievement-list {
+            max-width: 800px;
+            margin: 0 auto;
+            display: grid;
+            gap: 25px;
         }
 
-        .achievement-item h3 {
+        .achievement-item {
+            display: flex; /* Flex layout for icon and text */
+            align-items: flex-start;
+            background: var(--background-dark); /* Slightly darker card */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .achievement-item:hover {
+            transform: translateY(-5px);
+            background: #232323; /* Darker hover */
+        }
+        
+        .achievement-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-right: 20px;
+            /* Add a subtle circle background for the icon */
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            border: 2px solid var(--primary-color);
+            flex-shrink: 0;
+        }
+
+        .achievement-content {
+            flex-grow: 1;
+        }
+        
+        .achievement-content h3 {
             color: var(--text-light);
             margin-bottom: 5px;
         }
 
-        .achievement-item p {
+        .achievement-content .details {
+            color: var(--secondary-color); /* Use secondary color for important details */
+            font-weight: bold;
+            display: block;
+            margin-top: 5px;
+        }
+
+        .achievement-content p {
             color: var(--text-secondary);
             font-style: italic;
+            font-size: 0.95rem;
         }
 
         /* CONTACT SECTION */
@@ -340,23 +438,43 @@
 
         .social-links {
             text-align: center;
+            display: flex;
+            justify-content: center;
+            gap: 30px; /* Increased gap */
+            margin-top: 20px;
         }
+        
+        /* Updated social icons to be more distinct */
+        .social-link-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .social-link-item p {
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
 
         .social-icon {
             font-size: 1.5rem;
-            margin: 0 15px;
             width: 40px;
             height: 40px;
             line-height: 40px;
             border-radius: 50%;
             background: var(--background-dark);
             display: inline-block;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
         }
 
         .social-icon:hover {
             background: var(--primary-color);
             color: var(--background-dark);
+            box-shadow: 0 0 15px rgba(0, 188, 212, 0.8);
         }
 
         /* FOOTER */
@@ -399,22 +517,32 @@
             .hero-content .tagline {
                 font-size: 1.4rem;
             }
+            .achievement-item {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .achievement-icon {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
         }
     </style>
 </head>
 <body>
+    <div id="live-background"></div>
+    <div id="particles-js"></div>
     <header>
         <div class="container">
-            <h1 class="logo">Nikhil N </h1>
+            <h1 class="logo">Nikhil N M </h1>
             <nav>
                 <ul>
-                    <li><a href="#home">Home</a></li>
+                    <li><a href="#">Home</a></li>
                     <li><a href="#about">About</a></li>
                     <li><a href="#skills">Skills</a></li>
                     <li><a href="#projects">Projects</a></li>
                     <li><a href="#achievements">Achievements</a></li>
                     <li><a href="#contact">Contact</a></li>
-                   
                 </ul>
             </nav>
         </div>
@@ -424,11 +552,11 @@
         <section id="home" class="hero">
             <div class="container">
                 <div class="hero-content">
-                    <p class="greeting">Namasthe, I'm</p>
+                    <p class="greeting">Namaste, I'm</p>
                     <h2 class="name-title">Nikhil N M</h2>
-                    <h3 class="tagline">A Data Science Student & Machine Learning Enthusiast</h3>
+                    <h3 class="tagline">Data Science Student specialising in Data Analytics and Web Development to deliver full-stack data solutions.</h3>
                     <p class="intro-text">
-                        Turning complex data into actionable insights through robust analysis and predictive modeling.
+                        Turning complex data into meaningful insights which helps in decision making.
                     </p>
                     <a href="#projects" class="cta-button">View Projects</a>
                 </div>
@@ -440,16 +568,16 @@
                 <h2>About Me</h2>
                 <div class="about-content">
                     <div class="profile-photo">
-                        <img src="https://media.licdn.com/dms/image/v2/D5603AQE4ofOnr2HzgA/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1730210591714?e=1767225600&v=beta&t=D5oKa3arDs4N09aAc-o5StpbZOEopjVHHI0xRSATqNE" alt="Your Profile Picture">
+                        <img src="profile.jpg" alt="Your Profile Picture">
                     </div>
                     <div class="bio-text">
                         <p>
-                            I am a final-year student specializing in Data Science. My passion lies in applying statistical methods and machine learning algorithms to solve real-world problems across different domains. I am proficient in Python, SQL, and various data visualization tools.
+                            "Bridging data and deployment, I specialise in predictive modelling (Python/SQL) and web application development. My technical precision and resilience are directly inspired by my background in the NCC and sports."
                         </p>
                         <p>
                             Currently seeking opportunities to apply my skills in a challenging and dynamic environment. I'm always eager to learn new technologies and contribute to open-source projects.
                         </p>
-                        <a href="#" class="Nikhil_Resume.pdf[195].pdf" download>Download Resume <i class="fas fa-download"></i></a>
+                        <a href="Nikhil_Resume.pdf" class="cta-button btn-download" download>Download Resume <i class="fas fa-download"></i></a>
                     </div>
                 </div>
             </div>
@@ -471,7 +599,7 @@
                     </div>
                     <div class="skill-card">
                         <i class="fas fa-chart-bar"></i>
-                        <h3>Data Visualization</h3>
+                        <h3>Data Visualisation</h3>
                         <p>Tableau, Power BI, Matplotlib, Seaborn, Plotly</p>
                     </div>
                     <div class="skill-card">
@@ -485,30 +613,30 @@
 
         <section id="projects" class="section">
             <div class="container">
-                <h2>Featured Projects</h2>
+                <h2> PROJECTS </h2>
                 <div class="project-grid">
                     <div class="project-card">
-                        <div class="project-image-placeholder">PROJECT 1: Time talkes</div>
+                        <div class="project-image-placeholder">PROJECT 1 : <br>Smart Dining Management</div>
                         <h3>Web Page Creation</h3>
-                        <p>Used classification models to predict customer churn, achieving 90% accuracy. Techniques: Feature Engineering, Random Forest, Model Deployment.</p>
+                        <p>Streamline meal planning, ordering, and resource allocation in dining facilities.<br>Enhances efficiency, reduces food waste, and improves the overall dining experience.</p>
                         <div class="project-links">
                             <a href="#" target="_blank"><i class="fab fa-github"></i> Code</a>
                             <a href="#" target="_blank"><i class="fas fa-external-link-alt"></i> Live Demo</a>
                         </div>
                     </div>
                     <div class="project-card">
-                        <div class="project-image-placeholder">PROJECT 2: STOCK ANALYSIS</div>
-                        <h3>Stock Market Time Series Analysis</h3>
-                        <p>Analyzed historical stock data using ARIMA and LSTM models for forecasting. Focus on data cleaning and visualization.</p>
+                        <div class="project-image-placeholder">PROJECT 2 :<br>DATA ANALYSIS</div>
+                        <h3>Crime Data Analysis (BIG DATA)</h3>
+                        <p>Performed large-scale crime data analysis using PySpark to process and analyse big datasets efficiently.</p>
                         <div class="project-links">
                             <a href="#" target="_blank"><i class="fab fa-github"></i> Code</a>
                             <a href="#" target="_blank"><i class="fas fa-external-link-alt"></i> Report</a>
                         </div>
                     </div>
                     <div class="project-card">
-                        <div class="project-image-placeholder">PROJECT 3: NLP DASHBOARD</div>
-                        <h3>NLP Sentiment Analysis Dashboard</h3>
-                        <p>Developed a dashboard to visualize public sentiment from social media data using Python and Streamlit.</p>
+                        <div class="project-image-placeholder">PROJECT 3: <br>Internet Of Things [ IoT ]</div>
+                        <h3>Object detector using ESP32</h3>
+                        <p>Built an object detection system using ESP32, enabling real-time identification through integrated sensors.</p>
                         <div class="project-links">
                             <a href="#" target="_blank"><i class="fab fa-github"></i> Code</a>
                             <a href="#" target="_blank"><i class="fas fa-external-link-alt"></i> Dashboard</a>
@@ -526,23 +654,30 @@
                 <div class="achievement-list">
                     
                     <div class="achievement-item">
-                        <h3>National Cadet Corps (NCC) - C Certificate</h3>
-                        <p>Successfully completed the NCC 'C' Certificate examination, demonstrating proficiency in discipline, leadership, and national service. (Year: [Insert Year], Rank: [Insert Rank])</p>
+                        <div class="achievement-icon"><i class="fas fa-graduation-cap"></i></div>
+                        <div class="achievement-content">
+                            <h3>National Cadet Corps (NCC) - C Certificate (On going)</h3>
+                            <p>Successfully completed the NCC 'B' Certificate examination, demonstrating proficiency in discipline, leadership, and national service.</p>
+                            <span class="details">Year: 2025-26 | Rank: CPL</span>
+                        </div>
+                    </div>
+            
+                    <div class="achievement-item">
+                        <div class="achievement-icon"><i class="fas fa-table-tennis"></i></div>
+                        <div class="achievement-content">
+                            <h3>Sports - South Zone Men [ Table Tennis ]</h3>
+                            <p>Represented the University in the South Zone Inter University Table Tennis Tournament for Men (VIT Vellore).</p>
+                            <span class="details">Year: 2024-25 | Competition Level: Zonal</span>
+                        </div>
                     </div>
                     
                     <div class="achievement-item">
-                        <h3>NCC Camp Participation</h3>
-                        <p>Participated in the **Annual Training Camp (ATC)**, undertaking rigorous physical and military training drills for 10 days. (Location: [Insert Location], Year: [Insert Year])</p>
-                    </div>
-
-                    <div class="achievement-item">
-                        <h3>Sports - University Level [Name of Sport]</h3>
-                        <p>Secured the **[e.g., Bronze Medal]** in the [Sporting Event, e.g., High Jump] event at the University-level Sports Meet. (Year: [Insert Year])</p>
-                    </div>
-                    
-                    <div class="achievement-item">
-                        <h3>Team Sports - [Team Name/Role]</h3>
-                        <p>Served as a key member of the College **[e.g., Volleyball]** team, contributing to success in various Inter-collegiate tournaments. (Year: [Insert Academic Year])</p>
+                        <div class="achievement-icon"><i class="fas fa-trophy"></i></div>
+                        <div class="achievement-content">
+                            <h3>Team Sports - Carrom</h3>
+                            <p>Secured Consecutive Two Gold Medals in Intra University Carrom Competition, showcasing strategic thinking and focus.</p>
+                            <span class="details">Award: Gold Medal (x2) | Focus: Strategic Teamwork</span>
+                        </div>
                     </div>
 
                 </div>
@@ -553,14 +688,20 @@
         <section id="contact" class="section">
             <div class="container">
                 <h2>Get In Touch</h2>
-                <p>I am currently open to new opportunities and collaborations. Feel free to reach out!</p>
+                <p>I am currently open to new opportunities and collaborations. Feel free to reach out!</p><br>
                 <div class="contact-info">
                     <p><i class="fas fa-envelope"></i>nikhilshetty1122@gmail.com</p>
                     <p><i class="fas fa-phone"></i> 9036228739</p>
                 </div>
                 <div class="social-links">
-                    <a href="https://www.linkedin.com/in/nikhil-n-m-ab4771254/" target="_blank" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="https://github.com/" target="_blank" class="social-icon"><i class="fab fa-github"></i></a>
+                    <div class="social-link-item">
+                        <p>Linkedin</p>
+                        <a href="https://www.linkedin.com/in/nikhil-n-m-ab4771254/" target="_blank" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                    <div class="social-link-item">
+                        <p>Github</p>
+                        <a href="https://github.com/" target="_blank" class="social-icon"><i class="fab fa-github"></i></a>
+                    </div>
                 </div>
             </div>
         </section>
@@ -572,25 +713,189 @@
         </div>
     </footer>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+
     <script>
         // JAVASCRIPT (Internal)
         
+        // --- particles.js Initialization (Configures the floating points/lines) ---
+        particlesJS('particles-js', {
+            "particles": {
+                "number": {
+                    "value": 80,
+                    "density": {
+                        "enable": true,
+                        "value_area": 800
+                    }
+                },
+                "color": {
+                    "value": "#00bcd4" /* Primary Color */
+                },
+                "shape": {
+                    "type": "circle",
+                    "stroke": {
+                        "width": 0,
+                        "color": "#000000"
+                    },
+                    "polygon": {
+                        "nb_sides": 5
+                    }
+                },
+                "opacity": {
+                    "value": 0.5,
+                    "random": false,
+                    "anim": {
+                        "enable": false,
+                        "speed": 1,
+                        "opacity_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "size": {
+                    "value": 3,
+                    "random": true,
+                    "anim": {
+                        "enable": false,
+                        "speed": 40,
+                        "size_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#3f51b5", /* Secondary Color */
+                    "opacity": 0.4,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 2,
+                    "direction": "none",
+                    "random": false,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false,
+                    "attract": {
+                        "enable": false,
+                        "rotateX": 600,
+                        "rotateY": 1200
+                    }
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "grab" /* Particles link/connect on hover */
+                    },
+                    "onclick": {
+                        "enable": true,
+                        "mode": "push" /* Clicking adds new particles */
+                    },
+                    "resize": true
+                },
+                "modes": {
+                    "grab": {
+                        "distance": 140,
+                        "line_linked": {
+                            "opacity": 1
+                        }
+                    },
+                    "bubble": {
+                        "distance": 400,
+                        "size": 40,
+                        "duration": 2,
+                        "opacity": 8,
+                        "speed": 3
+                    },
+                    "repulse": {
+                        "distance": 200,
+                        "duration": 0.4
+                    },
+                    "push": {
+                        "particles_nb": 4
+                    },
+                    "remove": {
+                        "particles_nb": 2
+                    }
+                }
+            },
+            "retina_detect": true
+        });
+
+
         // Smooth scrolling for navigation links
         document.querySelectorAll('nav a').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault(); // Prevent default anchor link behavior
 
-                // Changed 'href' to lowercase to match the corrected ID 'achievements'
-                const targetId = this.getAttribute('href').toLowerCase(); // Get the target section's ID
-                const targetElement = document.querySelector(targetId); // Find the element
-
-                if (targetElement) {
-                    targetElement.scrollIntoView({
-                        behavior: 'smooth' // Enable smooth scrolling
+                const targetId = this.getAttribute('href'); 
+                
+                // Robust check to only scroll to elements if a valid ID is present
+                if (targetId && targetId.length > 1 && targetId !== '#') { 
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth' 
+                        });
+                    }
+                } else if (targetId === '#') {
+                    // If it is just '#' (Home link), scroll to the absolute top of the document
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
                     });
                 }
             });
         });
+
+
+        // === ScrollSpy/Active Navigation Highlighting Logic ===
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('nav a');
+
+        const setActiveLink = () => {
+            let currentSectionId = '';
+            
+            // Iterate over sections to find the one currently at or near the top of the viewport
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                // Offset the check by the height of the sticky header (approx. 70px)
+                if (window.scrollY >= sectionTop - 70) {
+                    currentSectionId = '#' + section.getAttribute('id');
+                }
+            });
+
+            // Handle the Home section edge case (when scrolled to the very top)
+            if (window.scrollY < sections[0].offsetTop - 70) {
+                currentSectionId = '#home'; // Use a consistent identifier for Home
+            }
+
+            // Loop through all nav links and apply/remove the 'active-link' class
+            navLinks.forEach(link => {
+                link.classList.remove('active-link');
+                const linkHref = link.getAttribute('href');
+
+                // Match against the current section ID
+                if (linkHref === currentSectionId) {
+                    link.classList.add('active-link');
+                } 
+                
+                // Special handling for the actual Home link (href="#") when the current section is home
+                if (currentSectionId === '#home' && linkHref === '#') {
+                    link.classList.add('active-link');
+                }
+            });
+        };
+
+        // Attach the ScrollSpy logic to the scroll event
+        window.addEventListener('scroll', setActiveLink);
+
+        // Initial call to set the correct active link on page load
+        setActiveLink();
+        
     </script>
 </body>
 </html>
